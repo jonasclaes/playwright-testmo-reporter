@@ -1,0 +1,31 @@
+{
+  "name": "playwright-testmo-reporter",
+  "version": "1.0.0",
+  "description": "A Playwright Reporter for the Testmo SaaS.",
+  "main": "reporter.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasclaes/playwright-testmo-reporter.git"
+  },
+  "keywords": [
+    "playwright",
+    "testmo",
+    "reporter"
+  ],
+  "author": "Jonas Claes <jonas@jonasclaes.be>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jonasclaes/playwright-testmo-reporter/issues"
+  },
+  "homepage": "https://github.com/jonasclaes/playwright-testmo-reporter#readme",
+  "peerDependencies": {
+    "@playwright/test": "^1.36.2",
+    "playwright-core": "^1.36.2"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.2.7"
+  }
+}
