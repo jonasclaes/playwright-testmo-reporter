@@ -8,7 +8,8 @@
     "formatting:check": "prettier --check .",
     "lint:fix": "eslint --fix .",
     "lint:check": "eslint .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "version": "git tag v$npm_package_version && git push --tags"
   },
   "repository": {
     "type": "git",
