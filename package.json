@@ -4,11 +4,14 @@
   "description": "A Playwright Reporter for the Testmo SaaS.",
   "main": "dist/reporter.js",
   "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
     "formatting:fix": "prettier --write .",
     "formatting:check": "prettier --check .",
     "lint:fix": "eslint --fix .",
     "lint:check": "eslint .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublish": "npm run lint:check && run build"
   },
   "repository": {
     "type": "git",
