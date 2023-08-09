@@ -250,6 +250,4 @@ interface XMLEntry {
   [x: string]: XMLValue;
 }
 
-// interface XMLArray extends Array<XMLValue> {}
-
 export default TestmoReporter;
