@@ -11,7 +11,7 @@
     "lint:fix": "eslint --fix .",
     "lint:check": "eslint .",
     "prepare": "husky install",
-    "prepublish": "npm run lint:check && run build"
+    "preversion": "npm run lint:check && npm run formatting:check && npm run build"
   },
   "repository": {
     "type": "git",
