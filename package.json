@@ -2,7 +2,7 @@
   "name": "playwright-testmo-reporter",
   "version": "1.0.0",
   "description": "A Playwright Reporter for the Testmo SaaS.",
-  "main": "reporter.ts",
+  "main": "dist/reporter.js",
   "scripts": {
     "formatting:fix": "prettier --write .",
     "formatting:check": "prettier --check .",
@@ -39,7 +39,8 @@
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
-    "prettier": "3.0.1"
+    "prettier": "3.0.1",
+    "typescript": "^5.1.6"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

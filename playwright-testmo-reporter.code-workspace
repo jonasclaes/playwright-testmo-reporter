@@ -7,7 +7,10 @@
   "settings": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
   },
   "extensions": {
     "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
