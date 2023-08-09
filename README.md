@@ -1,3 +1,8 @@
+![npm](https://img.shields.io/npm/v/playwright-testmo-reporter?logo=npm)
+![npm](https://img.shields.io/npm/dt/playwright-testmo-reporter?logo=npm)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/playwright-testmo-reporter?logo=npm)
+![Sonar Violations (long format)](https://img.shields.io/sonar/violations/jonasclaes_playwright-testmo-reporter?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud)
+
 # Playwright Testmo Reporter
 
 Playwright Testmo Reporter is a specialized test reporter designed for integration with the Testmo test management SaaS platform. It's crafted to generate a JUnit XML file that includes test steps, links to attachments, and details of fails, passes, etc. The project is written in TypeScript and aims to provide a seamless and lightweight experience.
