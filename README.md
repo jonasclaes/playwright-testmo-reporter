@@ -15,7 +15,7 @@ Playwright Testmo Reporter is a specialized test reporter designed for integrati
 Installing the Playwright Testmo Reporter is a breeze. Simply run the following command:
 
 ```bash
-npm install playwright-testmo-reporter
+npm install --save-dev playwright-testmo-reporter
 ```
 
 ## Configuration
