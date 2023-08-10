@@ -3,6 +3,9 @@
   "version": "1.0.6",
   "description": "A Playwright Reporter for the Testmo SaaS.",
   "main": "dist/reporter.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
