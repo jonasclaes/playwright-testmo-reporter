@@ -10,6 +10,8 @@ import { XMLBuilder } from "fast-xml-parser";
 import { formatFailure, stripAnsiEscapes } from "./util";
 import { assert } from "playwright-core/lib/utils";
 
+export type TestStepCategory = "hook" | "expect" | "pw:api" | "test.step";
+
 export interface TestmoReporterOptions {
   /**
    * Path where to save the JUnit XML file.
@@ -22,11 +24,18 @@ export interface TestmoReporterOptions {
    * @default true
    */
   embedTestSteps?: boolean;
+
+  /**
+   * Embed assertions as steps in the JUnit XML file.
+   * @default ["hook","expect","pw:api","test.step"]
+   */
+  testStepCategories?: TestStepCategory[];
 }
 
 class TestmoReporter implements Reporter {
   private outputFile: string;
   private embedTestSteps: boolean;
+  private testStepCategories: TestStepCategory[];
 
   private config: FullConfig;
   private suite: Suite;
@@ -36,9 +45,19 @@ class TestmoReporter implements Reporter {
   private totalFailures: number = 0;
   private totalSkipped: number = 0;
 
-  constructor({ outputFile, embedTestSteps }: TestmoReporterOptions = {}) {
+  constructor({
+    outputFile,
+    embedTestSteps,
+    testStepCategories,
+  }: TestmoReporterOptions = {}) {
     this.outputFile = outputFile ?? "testmo.xml";
     this.embedTestSteps = embedTestSteps ?? true;
+    this.testStepCategories = testStepCategories ?? [
+      "hook",
+      "expect",
+      "pw:api",
+      "test.step",
+    ];
   }
 
   onBegin(config: FullConfig, suite: Suite) {
@@ -178,6 +197,10 @@ class TestmoReporter implements Reporter {
         ...(testCase.results.at(-1)?.steps.map((step) => {
           let stepStatus = "passed";
           if (step.error) stepStatus = "failure";
+          if (
+            !this.testStepCategories.includes(step.category as TestStepCategory)
+          )
+            return;
 
           return {
             "@_name": `step[${stepStatus}]`,
