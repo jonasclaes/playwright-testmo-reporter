@@ -33,7 +33,7 @@ export interface TestmoReporterOptions {
 }
 
 class TestmoReporter implements Reporter {
-  private outputFile: string;
+  private readonly outputFile: string;
   private readonly embedTestSteps: boolean;
   private readonly testStepCategories: TestStepCategory[];
 
