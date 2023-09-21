@@ -37,6 +37,8 @@ reporter: [
       {
         outputFile: 'testmo/testmo.xml', // Optional: Output file path. Defaults to 'testmo.xml'.
         embedTestSteps: true, // Optional: Embed test steps in the XML file. Defaults to true.
+        testStepCategories: ["hook","expect","pw:api","test.step"], // Optional: Test step categories to include in the XML file. Defaults to ["hook","expect","pw:api","test.step"]. Possible options are "hook", "expect", "pw:api", "test.step".
+        testTitleDepth: 1, // Optional: Test case title depth to report in the XML file. Defaults to 1. Increase this to 2 include suite name. Increase this even further to include the path.
       }
     ]
 ]

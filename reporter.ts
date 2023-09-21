@@ -30,12 +30,19 @@ export interface TestmoReporterOptions {
    * @default ["hook","expect","pw:api","test.step"]
    */
   testStepCategories?: TestStepCategory[];
+
+  /**
+   * How many levels deep to report test titles.
+   * @default 1
+   */
+  testTitleDepth?: number;
 }
 
 class TestmoReporter implements Reporter {
   private readonly outputFile: string;
   private readonly embedTestSteps: boolean;
   private readonly testStepCategories: TestStepCategory[];
+  private readonly testTitleDepth: number;
 
   private config: FullConfig;
   private suite: Suite;
@@ -49,6 +56,7 @@ class TestmoReporter implements Reporter {
     outputFile,
     embedTestSteps,
     testStepCategories,
+    testTitleDepth,
   }: TestmoReporterOptions = {}) {
     this.outputFile = outputFile ?? "testmo.xml";
     this.embedTestSteps = embedTestSteps ?? true;
@@ -58,6 +66,7 @@ class TestmoReporter implements Reporter {
       "pw:api",
       "test.step",
     ];
+    this.testTitleDepth = testTitleDepth ?? 1;
   }
 
   onBegin(config: FullConfig, suite: Suite) {
@@ -148,8 +157,13 @@ class TestmoReporter implements Reporter {
   }
 
   private _buildTestCase(suite: Suite, testCase: TestCase): XMLEntry {
+    const titlePathArray = testCase.titlePath();
+    const titlePath = titlePathArray
+      .slice(titlePathArray.length - this.testTitleDepth)
+      .join(" › ");
+
     const entry = {
-      "@_name": testCase.title,
+      "@_name": titlePath,
       "@_classname": suite.title,
       "@_assertions": 0,
       "@_time":
@@ -165,9 +179,8 @@ class TestmoReporter implements Reporter {
 
     if (!testCase.ok()) {
       entry["failure"] = {
-        "@_message": `${path.basename(testCase.location.file)}:${
-          testCase.location.line
-        }:${testCase.location.column} ${testCase.title}`,
+        "@_message": `${path.basename(testCase.location.file)}:${testCase.location.line
+          }:${testCase.location.column} ${testCase.title}`,
         cdata: stripAnsiEscapes(formatFailure(this.config, testCase).message),
       };
     }
