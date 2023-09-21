@@ -179,8 +179,9 @@ class TestmoReporter implements Reporter {
 
     if (!testCase.ok()) {
       entry["failure"] = {
-        "@_message": `${path.basename(testCase.location.file)}:${testCase.location.line
-          }:${testCase.location.column} ${testCase.title}`,
+        "@_message": `${path.basename(testCase.location.file)}:${
+          testCase.location.line
+        }:${testCase.location.column} ${testCase.title}`,
         cdata: stripAnsiEscapes(formatFailure(this.config, testCase).message),
       };
     }
