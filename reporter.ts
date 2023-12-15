@@ -188,67 +188,15 @@ class TestmoReporter implements Reporter {
 
     const properties: XMLEntry[] = [];
 
-    if (testCase.annotations.length > 0) {
-      properties.push(
-        ...testCase.annotations.map((annotation) => {
-          if (annotation.type.startsWith("html:")) {
-            return {
-              "@_name": annotation.type,
-              cdata: annotation.description,
-            };
-          }
-
-          return {
-            "@_name": annotation.type,
-            "@_value": annotation.description,
-          };
-        }),
-      );
-    }
-
-    if (this.embedTestSteps) {
-      properties.push(
-        ...(testCase.results.at(-1)?.steps.map((step) => {
-          let stepStatus = "passed";
-          if (step.error) stepStatus = "failure";
-          if (
-            !this.testStepCategories.includes(step.category as TestStepCategory)
-          )
-            return;
-
-          return {
-            "@_name": `step[${stepStatus}]`,
-            "@_value": step.title,
-          };
-        }) ?? []),
-      );
-    }
+    this.addAnnotationsToProperties(testCase, properties);
+    this.addStepsToProperties(testCase, properties);
 
     const systemOut: string[] = [];
     const systemErr: string[] = [];
     for (const result of testCase.results) {
       systemOut.push(...result.stdout.map((item) => item.toString()));
       systemErr.push(...result.stderr.map((item) => item.toString()));
-      for (const attachment of result.attachments) {
-        if (!attachment.path) {
-          continue;
-        }
-
-        try {
-          const attachmentPath = path.relative(
-            this.config.rootDir,
-            attachment.path,
-          );
-          if (fs.existsSync(attachment.path))
-            systemOut.push(`\n[[ATTACHMENT|${attachmentPath}]]\n`);
-          else
-            systemErr.push(
-              `\nWarning: attachment ${attachmentPath} is missing`,
-            );
-        } catch (e) {
-          console.error(e);
-        }
-      }
+      this.addAttachmentsToOutput(result, systemOut, systemErr);
     }
 
     if (properties.length > 0) {
@@ -269,6 +217,74 @@ class TestmoReporter implements Reporter {
       };
 
     return entry;
+  }
+
+  private addAttachmentsToOutput(
+    result,
+    systemOut: string[],
+    systemErr: string[],
+  ) {
+    for (const attachment of result.attachments) {
+      if (!attachment.path) {
+        continue;
+      }
+
+      try {
+        const attachmentPath = path.relative(
+          this.config.rootDir,
+          attachment.path,
+        );
+        if (fs.existsSync(attachment.path))
+          systemOut.push(`\n[[ATTACHMENT|${attachmentPath}]]\n`);
+        else
+          systemErr.push(`\nWarning: attachment ${attachmentPath} is missing`);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+
+  private addAnnotationsToProperties(
+    testCase: TestCase,
+    properties: XMLEntry[],
+  ) {
+    if (testCase.annotations.length > 0) {
+      properties.push(
+        ...testCase.annotations.map((annotation) => {
+          if (annotation.type.startsWith("html:")) {
+            return {
+              "@_name": annotation.type,
+              cdata: annotation.description,
+            };
+          }
+
+          return {
+            "@_name": annotation.type,
+            "@_value": annotation.description,
+          };
+        }),
+      );
+    }
+  }
+
+  private addStepsToProperties(testCase: TestCase, properties: XMLEntry[]) {
+    if (this.embedTestSteps) {
+      properties.push(
+        ...(testCase.results.at(-1)?.steps.map((step) => {
+          let stepStatus = "passed";
+          if (step.error) stepStatus = "failure";
+          if (
+            !this.testStepCategories.includes(step.category as TestStepCategory)
+          )
+            return;
+
+          return {
+            "@_name": `step[${stepStatus}]`,
+            "@_value": step.title,
+          };
+        }) ?? []),
+      );
+    }
   }
 
   printsToStdio(): boolean {
