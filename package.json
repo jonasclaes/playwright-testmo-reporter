@@ -1,6 +1,6 @@
 {
   "name": "playwright-testmo-reporter",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "A Playwright Reporter for the Testmo SaaS.",
   "main": "dist/reporter.js",
   "files": [

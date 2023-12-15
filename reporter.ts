@@ -20,6 +20,12 @@ export interface TestmoReporterOptions {
   outputFile?: string;
 
   /**
+   * Embed browser type as property in the JUnit XML file.
+   * @default false
+   */
+  embedBrowserType?: boolean;
+
+  /**
    * Embed test steps as properties in the JUnit XML file.
    * @default true
    */
@@ -40,6 +46,7 @@ export interface TestmoReporterOptions {
 
 class TestmoReporter implements Reporter {
   private readonly outputFile: string;
+  private readonly embedBrowserType: boolean;
   private readonly embedTestSteps: boolean;
   private readonly testStepCategories: TestStepCategory[];
   private readonly testTitleDepth: number;
@@ -54,11 +61,13 @@ class TestmoReporter implements Reporter {
 
   constructor({
     outputFile,
+    embedBrowserType,
     embedTestSteps,
     testStepCategories,
     testTitleDepth,
   }: TestmoReporterOptions = {}) {
     this.outputFile = outputFile ?? "testmo.xml";
+    this.embedBrowserType = embedBrowserType ?? false;
     this.embedTestSteps = embedTestSteps ?? true;
     this.testStepCategories = testStepCategories ?? [
       "hook",
@@ -189,6 +198,7 @@ class TestmoReporter implements Reporter {
     const properties: XMLEntry[] = [];
 
     this.addAnnotationsToProperties(testCase, properties);
+    this.addBrowserToProperties(suite, properties);
     this.addStepsToProperties(testCase, properties);
 
     const systemOut: string[] = [];
@@ -284,6 +294,17 @@ class TestmoReporter implements Reporter {
           };
         }) ?? []),
       );
+    }
+  }
+
+  private addBrowserToProperties(suite: Suite, properties: XMLEntry[]) {
+    if (this.embedBrowserType) {
+      const browser = suite.project().use.defaultBrowserType;
+
+      properties.push({
+        "@_name": `browser`,
+        "@_value": browser,
+      });
     }
   }
 
