@@ -39,13 +39,13 @@
     "fast-xml-parser": "^4.2.7"
   },
   "devDependencies": {
-    "@types/node": "^16.18.53",
+    "@types/node": "^18.19.4",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.2.0",
     "prettier": "^3.0.3",
     "typescript": "^5.1.6"
   },
