@@ -3,6 +3,7 @@ import type {
   Reporter,
   Suite,
   TestCase,
+  TestResult,
 } from "@playwright/test/reporter";
 import path from "path";
 import fs from "fs";
@@ -11,6 +12,7 @@ import { formatFailure, stripAnsiEscapes } from "./util";
 import { assert } from "playwright-core/lib/utils";
 
 export type TestStepCategory = "hook" | "expect" | "pw:api" | "test.step";
+export type AttachmentBasePathCallback = (basePath: string) => string;
 
 export interface TestmoReporterOptions {
   /**
@@ -42,6 +44,11 @@ export interface TestmoReporterOptions {
    * @default 1
    */
   testTitleDepth?: number;
+
+  /**
+   * Function which returns an overridden path.
+   */
+  attachmentBasePathCallback?: AttachmentBasePathCallback;
 }
 
 class TestmoReporter implements Reporter {
@@ -50,6 +57,7 @@ class TestmoReporter implements Reporter {
   private readonly embedTestSteps: boolean;
   private readonly testStepCategories: TestStepCategory[];
   private readonly testTitleDepth: number;
+  private readonly attachmentBasePathCallback?: AttachmentBasePathCallback;
 
   private config: FullConfig;
   private suite: Suite;
@@ -65,6 +73,7 @@ class TestmoReporter implements Reporter {
     embedTestSteps,
     testStepCategories,
     testTitleDepth,
+    attachmentBasePathCallback,
   }: TestmoReporterOptions = {}) {
     this.outputFile = outputFile ?? "testmo.xml";
     this.embedBrowserType = embedBrowserType ?? false;
@@ -76,6 +85,7 @@ class TestmoReporter implements Reporter {
       "test.step",
     ];
     this.testTitleDepth = testTitleDepth ?? 1;
+    this.attachmentBasePathCallback = attachmentBasePathCallback;
   }
 
   onBegin(config: FullConfig, suite: Suite) {
@@ -206,7 +216,7 @@ class TestmoReporter implements Reporter {
     for (const result of testCase.results) {
       systemOut.push(...result.stdout.map((item) => item.toString()));
       systemErr.push(...result.stderr.map((item) => item.toString()));
-      this.addAttachmentsToOutput(result, systemOut, systemErr);
+      this.addAttachmentsToProperties(result, properties);
     }
 
     if (properties.length > 0) {
@@ -229,10 +239,9 @@ class TestmoReporter implements Reporter {
     return entry;
   }
 
-  private addAttachmentsToOutput(
-    result,
-    systemOut: string[],
-    systemErr: string[],
+  private addAttachmentsToProperties(
+    result: TestResult,
+    properties: XMLEntry[],
   ) {
     for (const attachment of result.attachments) {
       if (!attachment.path) {
@@ -240,14 +249,34 @@ class TestmoReporter implements Reporter {
       }
 
       try {
-        const attachmentPath = path.relative(
+        let attachmentPath = path.relative(
           this.config.rootDir,
           attachment.path,
         );
-        if (fs.existsSync(attachment.path))
-          systemOut.push(`\n[[ATTACHMENT|${attachmentPath}]]\n`);
-        else
-          systemErr.push(`\nWarning: attachment ${attachmentPath} is missing`);
+
+        if (this.attachmentBasePathCallback) {
+          const basePath = path
+            .normalize(attachmentPath)
+            .replace(/^(\.\.(\/|\\|$))+/, "");
+          attachmentPath = this.attachmentBasePathCallback(basePath);
+        }
+
+        if (!fs.existsSync(attachment.path)) {
+          continue;
+        }
+
+        if (attachmentPath.startsWith("https://")) {
+          properties.push({
+            "@_name": "url:attachment",
+            "@_value": attachmentPath,
+          });
+          continue;
+        }
+
+        properties.push({
+          "@_name": "attachment",
+          "@_value": attachmentPath,
+        });
       } catch (e) {
         console.error(e);
       }
