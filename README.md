@@ -40,6 +40,7 @@ reporter: [
         embedTestSteps: true, // Optional: Embed test steps in the XML file. Defaults to true.
         testStepCategories: ["hook","expect","pw:api","test.step"], // Optional: Test step categories to include in the XML file. Defaults to ["hook","expect","pw:api","test.step"]. Possible options are "hook", "expect", "pw:api", "test.step".
         testTitleDepth: 1, // Optional: Test case title depth to report in the XML file. Defaults to 1. Increase this to 2 include suite name. Increase this even further to include the path.
+        attachmentBasePathCallback: (basePath) => `http://playwright-s3.services.mycompany.example:9000/test/${TEST_RUN_UUID}/` + basePath.split(/[\\/]/g).join('/'), // Optional: Specify a callback which accepts and returns a string to generate a custom attachment base path. Useful for referring to an artifact storage location for example.
       }
     ]
 ]
