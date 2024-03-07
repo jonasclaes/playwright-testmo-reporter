@@ -1,7 +1,7 @@
-![npm](https://img.shields.io/npm/v/playwright-testmo-reporter?logo=npm)
-![npm](https://img.shields.io/npm/dt/playwright-testmo-reporter?logo=npm)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/playwright-testmo-reporter?logo=npm)
-![Sonar Violations (long format)](https://img.shields.io/sonar/violations/jonasclaes_playwright-testmo-reporter?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud)
+[![npm](https://img.shields.io/npm/v/playwright-testmo-reporter?logo=npm)](https://www.npmjs.com/package/playwright-testmo-reporter)
+[![npm](https://img.shields.io/npm/dt/playwright-testmo-reporter?logo=npm)](https://www.npmjs.com/package/playwright-testmo-reporter)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/playwright-testmo-reporter?logo=npm)](https://www.npmjs.com/package/playwright-testmo-reporter)
+[![Sonar Violations (long format)](https://img.shields.io/sonar/violations/jonasclaes_playwright-testmo-reporter?server=https%3A%2F%2Fsonarcloud.io&logo=sonarcloud)](https://sonarcloud.io/project/overview?id=jonasclaes_playwright-testmo-reporter)
 
 # Playwright Testmo Reporter
 
