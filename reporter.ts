@@ -12,7 +12,12 @@ import { XMLBuilder } from "fast-xml-parser";
 import { formatFailure, stripAnsiEscapes } from "./util";
 import { assert } from "playwright-core/lib/utils";
 
-export type TestStepCategory = "hook" | "expect" | "pw:api" | "test.step";
+export type TestStepCategory =
+  | "hook"
+  | "expect"
+  | "pw:api"
+  | "test.step"
+  | "fixture";
 export type AttachmentBasePathCallback = (basePath: string) => string;
 
 export interface TestmoReporterOptions {
@@ -47,6 +52,12 @@ export interface TestmoReporterOptions {
   testTitleDepth?: number;
 
   /**
+   * Include test sub fields in the JUnit XML file.
+   * @default false
+   */
+  includeTestSubFields?: boolean;
+
+  /**
    * Function which returns an overridden path.
    */
   attachmentBasePathCallback?: AttachmentBasePathCallback;
@@ -58,6 +69,7 @@ class TestmoReporter implements Reporter {
   private readonly embedTestSteps: boolean;
   private readonly testStepCategories: TestStepCategory[];
   private readonly testTitleDepth: number;
+  private readonly includeTestSubFields: boolean;
   private readonly attachmentBasePathCallback?: AttachmentBasePathCallback;
 
   private config: FullConfig;
@@ -74,6 +86,7 @@ class TestmoReporter implements Reporter {
     embedTestSteps,
     testStepCategories,
     testTitleDepth,
+    includeTestSubFields,
     attachmentBasePathCallback,
   }: TestmoReporterOptions = {}) {
     this.outputFile = outputFile ?? "testmo.xml";
@@ -86,6 +99,7 @@ class TestmoReporter implements Reporter {
       "test.step",
     ];
     this.testTitleDepth = testTitleDepth ?? 1;
+    this.includeTestSubFields = includeTestSubFields ?? false;
     this.attachmentBasePathCallback = attachmentBasePathCallback;
   }
 
@@ -313,27 +327,80 @@ class TestmoReporter implements Reporter {
     const lastResult = testCase.results.at(-1);
     if (!lastResult) return;
 
-    const createStepProperty = (step: TestStep) => {
-      let stepStatus = "passed";
-
-      if (step.error) stepStatus = "failure";
-      if (
-        !this.testStepCategories.includes(step.category as TestStepCategory)
-      ) {
-        return;
-      }
-
-      return {
-        "@_name": `step[${stepStatus}]`,
-        "@_value": step.title,
-      };
-    };
-
     const stepProperties = lastResult.steps.map((step) =>
-      createStepProperty(step),
+      this.createStepProperty(step),
     );
 
     properties.push(...stepProperties);
+  }
+
+  private createStepProperty(step: TestStep) {
+    let stepStatus = "passed";
+
+    if (step.error) stepStatus = "failure";
+    if (!this.testStepCategories.includes(step.category as TestStepCategory)) {
+      return;
+    }
+
+    if (step.steps.length > 0 && this.includeTestSubFields) {
+      return {
+        "@_name": `step[${stepStatus}]`,
+        cdata: this.createStepHtml(step),
+      };
+    }
+
+    return {
+      "@_name": `step[${stepStatus}]`,
+      "@_value": step.title,
+    };
+  }
+
+  private createStepHtml(step: TestStep): string {
+    if (!this.testStepCategories.includes(step.category as TestStepCategory)) {
+      return;
+    }
+
+    const nextSteps = step.steps
+      .map((step) => this.createStepHtml(step))
+      .join("");
+
+    const { stepTitle, stepBody } = this.getStepTitleAndBodyFromStep(step);
+
+    return `<test-step-subfield name="${stepTitle}">${stepBody}</test-step-subfield>${nextSteps}`;
+  }
+
+  private getStepTitleAndBodyFromStep(step: TestStep) {
+    let stepTitle = "";
+    let stepBody = "";
+
+    if (step.category === "hook") {
+      stepTitle = `Hook`;
+      stepBody = step.title;
+    }
+
+    if (step.category === "pw:api") {
+      stepTitle = `Playwright API`;
+      stepBody = step.title;
+    }
+
+    if (step.category === "fixture") {
+      stepTitle = `Fixture`;
+      stepBody = step.title;
+    }
+
+    if (step.category === "test.step") {
+      stepTitle = `Step`;
+      stepBody = step.title;
+    }
+
+    if (step.category === "expect") {
+      stepTitle = `Expected`;
+      stepBody = step.title;
+    }
+
+    if (stepTitle === "") stepTitle = step.title;
+
+    return { stepTitle, stepBody };
   }
 
   private addBrowserToProperties(suite: Suite, properties: XMLEntry[]) {
