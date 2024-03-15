@@ -16,4 +16,5 @@ module.exports = {
   },
   plugins: ["@typescript-eslint"],
   rules: {},
+  ignorePatterns: ["example/**"],
 };
