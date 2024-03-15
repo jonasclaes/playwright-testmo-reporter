@@ -4,6 +4,7 @@ import type {
   Suite,
   TestCase,
   TestResult,
+  TestStep,
 } from "@playwright/test/reporter";
 import path from "path";
 import fs from "fs";
@@ -307,23 +308,32 @@ class TestmoReporter implements Reporter {
   }
 
   private addStepsToProperties(testCase: TestCase, properties: XMLEntry[]) {
-    if (this.embedTestSteps) {
-      properties.push(
-        ...(testCase.results.at(-1)?.steps.map((step) => {
-          let stepStatus = "passed";
-          if (step.error) stepStatus = "failure";
-          if (
-            !this.testStepCategories.includes(step.category as TestStepCategory)
-          )
-            return;
+    if (!this.embedTestSteps) return;
 
-          return {
-            "@_name": `step[${stepStatus}]`,
-            "@_value": step.title,
-          };
-        }) ?? []),
-      );
-    }
+    const lastResult = testCase.results.at(-1);
+    if (!lastResult) return;
+
+    const createStepProperty = (step: TestStep) => {
+      let stepStatus = "passed";
+
+      if (step.error) stepStatus = "failure";
+      if (
+        !this.testStepCategories.includes(step.category as TestStepCategory)
+      ) {
+        return;
+      }
+
+      return {
+        "@_name": `step[${stepStatus}]`,
+        "@_value": step.title,
+      };
+    };
+
+    const stepProperties = lastResult.steps.map((step) =>
+      createStepProperty(step),
+    );
+
+    properties.push(...stepProperties);
   }
 
   private addBrowserToProperties(suite: Suite, properties: XMLEntry[]) {
@@ -338,7 +348,7 @@ class TestmoReporter implements Reporter {
   }
 
   printsToStdio(): boolean {
-    return true;
+    return false;
   }
 
   getExactTime(): number {
