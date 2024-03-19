@@ -1,6 +1,6 @@
 {
   "name": "playwright-testmo-reporter",
-  "version": "1.8.4",
+  "version": "1.8.5-add-substepping.0",
   "description": "A Playwright Reporter for the Testmo SaaS.",
   "main": "dist/reporter.js",
   "files": [
@@ -50,6 +50,7 @@
     "typescript": "^5.1.6"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{js,ts}": "eslint --fix"
   }
 }

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { TestmoReporterOptions } from "playwright-testmo-reporter";
 
 /**
  * Read environment variables from file.
@@ -21,19 +22,25 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ["html"],
+    [
+      "html",
+      {
+        open: "never",
+      },
+    ],
     [
       "playwright-testmo-reporter",
       {
         outputFile: "testmo/testmo.xml", // Optional: Output file path. Defaults to 'testmo.xml'.
         embedBrowserType: true, // Optional: Embed browser type in the XML file. Defaults to false.
         embedTestSteps: true, // Optional: Embed test steps in the XML file. Defaults to true.
-        testStepCategories: ["hook", "expect", "pw:api", "test.step"], // Optional: Test step categories to include in the XML file. Defaults to ["hook","expect","pw:api","test.step"]. Possible options are "hook", "expect", "pw:api", "test.step".
+        testStepCategories: ["expect", "test.step"], // Optional: Test step categories to include in the XML file. Defaults to ["hook","expect","pw:api","test.step"]. Possible options are "hook", "expect", "pw:api", "test.step".
         testTitleDepth: 1, // Optional: Test case title depth to report in the XML file. Defaults to 1. Increase this to 2 include suite name. Increase this even further to include the path.
+        includeTestSubFields: true, // Optional: Include test sub fields in the XML file. Defaults to false.
         attachmentBasePathCallback: (basePath) =>
           `http://playwright-s3.services.mycompany.example:9000/test/${0}/` +
           basePath.split(/[\\/]/g).join("/"), // Optional: Specify a callback which accepts and returns a string to generate a custom attachment base path. Useful for referring to an artifact storage location for example.
-      },
+      } satisfies TestmoReporterOptions,
     ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
