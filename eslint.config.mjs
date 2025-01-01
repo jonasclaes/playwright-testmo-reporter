@@ -3,7 +3,7 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import prettier from "eslint-config-prettier";
 
-/** @type {import('@types/eslint').Linter.FlatConfig} */
+/** @type {import('eslint').Linter.Config} */
 const config = [
   { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,
