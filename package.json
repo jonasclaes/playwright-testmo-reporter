@@ -9,10 +9,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "formatting:fix": "prettier --write .",
-    "formatting:check": "prettier --check .",
-    "lint:fix": "eslint --fix .",
-    "lint:check": "eslint .",
+    "format": "prettier --write .",
+    "lint": "eslint --fix .",
     "prepare": "husky",
     "preversion": "npm run lint:check && npm run formatting:check && npm run build"
   },
@@ -36,11 +34,14 @@
     "playwright-core": "^1.36.2"
   },
   "dependencies": {
-    "fast-xml-parser": "^4.5.1"
+    "colors": "^1.4.0",
+    "fast-xml-parser": "^4.5.1",
+    "stack-utils": "^2.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/node": "^22.10.3",
+    "@types/stack-utils": "^2.0.3",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.14.0",

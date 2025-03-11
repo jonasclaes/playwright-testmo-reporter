@@ -32,7 +32,9 @@ import {
   Location,
 } from "@playwright/test/reporter";
 import path from "path";
-import { colors, parseStackTraceLine } from "playwright-core/lib/utilsBundle";
+import StackUtils from "stack-utils";
+import url from "url";
+import colors from "colors";
 
 export type TestResultOutput = {
   chunk: string | Buffer;
@@ -40,16 +42,9 @@ export type TestResultOutput = {
 };
 export const kOutputSymbol = Symbol("output");
 
-type Annotation = {
-  title: string;
-  message: string;
-  location?: Location;
-};
+type Annotation = { title: string; message: string; location?: Location };
 
-type ErrorDetails = {
-  message: string;
-  location?: Location;
-};
+type ErrorDetails = { message: string; location?: Location };
 
 export function formatFailure(
   config: FullConfig,
@@ -59,10 +54,7 @@ export function formatFailure(
     includeStdio?: boolean;
     includeAttachments?: boolean;
   } = {},
-): {
-  message: string;
-  annotations: Annotation[];
-} {
+): { message: string; annotations: Annotation[] } {
   const { index, includeStdio, includeAttachments = true } = options;
   const lines: string[] = [];
   const title = formatTestTitle(config, test);
@@ -151,10 +143,7 @@ export function formatFailure(
     lines.push(...resultLines);
   }
   lines.push("");
-  return {
-    message: lines.join("\n"),
-    annotations,
-  };
+  return { message: lines.join("\n"), annotations };
 }
 
 export function formatResultFailure(
@@ -225,11 +214,7 @@ export function formatTestTitle(
 function formatTestHeader(
   config: FullConfig,
   test: TestCase,
-  options: {
-    indent?: string;
-    index?: number;
-    mode?: "default" | "error";
-  } = {},
+  options: { indent?: string; index?: number; mode?: "default" | "error" } = {},
 ): string {
   const title = formatTestTitle(config, test);
   const header = `${options.indent || ""}${
@@ -289,10 +274,7 @@ export function formatError(
   let location = error.location;
   if (parsedStack && !location) location = parsedStack.location;
 
-  return {
-    location,
-    message: tokens.join("\n"),
-  };
+  return { location, message: tokens.join("\n") };
 }
 
 export function separator(text: string = ""): string {
@@ -303,6 +285,36 @@ export function separator(text: string = ""): string {
 
 function indent(lines: string, tab: string) {
   return lines.replace(/^(?=.+$)/gm, tab);
+}
+
+export type StackFrame = {
+  file: string;
+  line: number;
+  column: number;
+  function?: string;
+};
+
+const stackUtils = new StackUtils({ internals: StackUtils.nodeInternals() });
+
+export function parseStackTraceLine(line: string): StackFrame | null {
+  const frame = stackUtils.parseLine(line);
+  if (!frame) return null;
+  if (
+    !process.env.PWDEBUGIMPL &&
+    (frame.file?.startsWith("internal") || frame.file?.startsWith("node:"))
+  )
+    return null;
+  if (!frame.file) return null;
+  // ESM files return file:// URLs, see here: https://github.com/tapjs/stack-utils/issues/60
+  const file = frame.file.startsWith("file://")
+    ? url.fileURLToPath(frame.file)
+    : path.resolve(process.cwd(), frame.file);
+  return {
+    file,
+    line: frame.line || 0,
+    column: frame.column || 0,
+    function: frame.function,
+  };
 }
 
 export function prepareErrorStack(stack: string): {
