@@ -264,6 +264,14 @@ export class TestmoReporter implements Reporter {
       }
 
       try {
+        if (attachment.path.startsWith("https://")) {
+          properties.push({
+            "@_name": "url:attachment",
+            "@_value": attachment.path,
+          });
+          continue;
+        }
+
         let attachmentPath = path.relative(
           this.config.rootDir,
           attachment.path,
@@ -277,14 +285,6 @@ export class TestmoReporter implements Reporter {
         }
 
         if (!fs.existsSync(attachment.path)) {
-          continue;
-        }
-
-        if (attachmentPath.startsWith("https://")) {
-          properties.push({
-            "@_name": "url:attachment",
-            "@_value": attachmentPath,
-          });
           continue;
         }
 
