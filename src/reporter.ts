@@ -63,7 +63,7 @@ export interface TestmoReporterOptions {
   attachmentBasePathCallback?: AttachmentBasePathCallback;
 }
 
-class TestmoReporter implements Reporter {
+export class TestmoReporter implements Reporter {
   private readonly outputFile: string;
   private readonly embedBrowserType: boolean;
   private readonly embedTestSteps: boolean;
