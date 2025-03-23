@@ -1,5 +1,11 @@
 # playwright-testmo-reporter
 
+## 1.14.0
+
+### Minor Changes
+
+- 7c5dcfb: fix support for URL attachments
+
 ## 1.13.0
 
 ### Minor Changes
