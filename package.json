@@ -14,7 +14,7 @@
     "format": "prettier --write .",
     "lint": "eslint --fix .",
     "prepare": "husky",
-    "swoosh": "npm run build && changeset version && changeset publish"
+    "release": "npm run build && changeset publish"
   },
   "repository": {
     "type": "git",
