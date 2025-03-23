@@ -1,5 +1,11 @@
 # playwright-testmo-reporter
 
+## 1.15.0
+
+### Minor Changes
+
+- 7894f34: upgrade fast-xml-parser
+
 ## 1.14.0
 
 ### Minor Changes
