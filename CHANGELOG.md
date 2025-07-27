@@ -1,5 +1,11 @@
 # playwright-testmo-reporter
 
+## 1.16.0
+
+### Minor Changes
+
+- [#19](https://github.com/jonasclaes/playwright-testmo-reporter/pull/19) [`daa4f69`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/daa4f69bd6512c850809e2b315d2aa7b2c047c24) Thanks [@jonasclaes](https://github.com/jonasclaes)! - dependency updates
+
 ## 1.15.0
 
 ### Minor Changes
