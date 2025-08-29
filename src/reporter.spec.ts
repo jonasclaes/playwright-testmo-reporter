@@ -170,6 +170,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: ["This is a test failure", "This is another test failure"],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     } satisfies TestResult);
     mockFileSuite.addTest(mockTestCase);
 
@@ -273,6 +274,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: [],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     });
     mockFileSuite.addTest(mockTestCase);
 
@@ -331,6 +333,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: ["Hello, World!"],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     });
     mockFileSuite.addTest(mockTestCase);
 
@@ -451,6 +454,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: [],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     });
     mockFileSuite.addTest(mockTestCase);
 
@@ -532,6 +536,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: [],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     });
     mockFileSuite.addTest(mockTestCase);
 
@@ -670,6 +675,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: [],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     });
     mockFileSuite.addTest(mockTestCase);
 
@@ -816,6 +822,7 @@ describe("Playwright Testmo Reporter", () => {
       stderr: [],
       workerIndex: 0,
       startTime: new Date(),
+      annotations: [],
     });
     mockFileSuite.addTest(mockTestCase);
 
