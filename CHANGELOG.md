@@ -1,5 +1,13 @@
 # playwright-testmo-reporter
 
+## 1.17.0
+
+### Minor Changes
+
+- [#22](https://github.com/jonasclaes/playwright-testmo-reporter/pull/22) [`18ac76b`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/18ac76bac88cf2d4052e78783fae54737a7a5764) Thanks [@jonasclaes](https://github.com/jonasclaes)! - upgrade dependencies
+
+- [#24](https://github.com/jonasclaes/playwright-testmo-reporter/pull/24) [`ef22d69`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/ef22d6971cbc80228428ee124b4ee48883eca027) Thanks [@jonasclaes](https://github.com/jonasclaes)! - handle potential null contentType in attachment processing
+
 ## 1.16.0
 
 ### Minor Changes
