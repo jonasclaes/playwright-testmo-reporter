@@ -79,8 +79,9 @@ export function formatFailure(
     if (includeAttachments) {
       for (let i = 0; i < result.attachments.length; ++i) {
         const attachment = result.attachments[i];
+        // Issue #21 - BrowserStack does not set attachment.contentType, even though the Playwright type does not allow it to be null.
         const hasPrintableContent =
-          attachment.contentType.startsWith("text/") && attachment.body;
+          attachment.contentType?.startsWith("text/") && attachment.body;
         if (!attachment.path && !hasPrintableContent) continue;
         resultLines.push("");
         resultLines.push(
