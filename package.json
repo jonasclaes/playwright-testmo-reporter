@@ -37,12 +37,12 @@
   },
   "homepage": "https://github.com/jonasclaes/playwright-testmo-reporter#readme",
   "peerDependencies": {
-    "@playwright/test": "^1.36.2",
-    "playwright-core": "^1.36.2"
+    "@playwright/test": "^1.56.0",
+    "playwright-core": "^1.56.0"
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "fast-xml-parser": "^5.2.5",
+    "fast-xml-parser": "^5.3.0",
     "stack-utils": "^2.0.6"
   },
   "devDependencies": {
