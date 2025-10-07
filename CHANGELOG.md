@@ -1,5 +1,13 @@
 # playwright-testmo-reporter
 
+## 1.18.0
+
+### Minor Changes
+
+- [#26](https://github.com/jonasclaes/playwright-testmo-reporter/pull/26) [`4978015`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/4978015da57c7eb379ab5f49a046f66ffe4280ea) Thanks [@jonasclaes](https://github.com/jonasclaes)! - update playwright and reporter dependencies
+
+- [#26](https://github.com/jonasclaes/playwright-testmo-reporter/pull/26) [`4978015`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/4978015da57c7eb379ab5f49a046f66ffe4280ea) Thanks [@jonasclaes](https://github.com/jonasclaes)! - update dependencies and publish workflow
+
 ## 1.17.0
 
 ### Minor Changes
