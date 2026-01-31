@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": "true",
   "scripts": {
     "test": "playwright test",
     "test:report": "testmo automation:run:submit --instance https://jonasclaesbe.testmo.net --project-id 17 --source \"playwright-testmo-reporter\" --name example --results ./testmo/testmo.xml"
