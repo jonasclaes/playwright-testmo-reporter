@@ -12,6 +12,7 @@
     "build": "tsup src/reporter.ts --format cjs,esm --dts",
     "build:watch": "tsup src/reporter.ts --format cjs,esm --dts --watch",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "format": "prettier --write .",
     "lint": "eslint --fix .",
     "prepare": "husky",
