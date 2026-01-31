@@ -55,6 +55,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
 
@@ -89,6 +90,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -134,6 +136,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -205,6 +208,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -250,6 +254,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -309,6 +314,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -368,6 +374,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -414,6 +421,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -496,6 +504,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -571,6 +580,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -718,6 +728,7 @@ describe("Playwright Testmo Reporter", () => {
       rootDir: "",
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
+      tags: [],
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");

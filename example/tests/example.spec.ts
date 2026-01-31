@@ -24,19 +24,13 @@ test("substepping", async ({ page }) => {
     await page.goto("https://jonasclaes.be/");
   });
 
-  await test.step("Accept cookies", async () => {
-    await page.getByRole("button", { name: "Accept All" }).click();
-  });
-
   await test.step("Go to a project", async () => {
     await page.getByRole("link", { name: "Projects", exact: true }).click();
 
-    await test
-      .expect(page.getByRole("heading", { name: "Projects" }))
-      .toBeVisible();
-    await test
-      .expect(page.getByRole("heading", { name: "Projects" }))
-      .toHaveText("Projects");
+    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Projects" })).toHaveText(
+      "Projects",
+    );
   });
 
   await test.step('Click on the "The Update Framework" project', async () => {
@@ -49,8 +43,9 @@ test("substepping", async ({ page }) => {
       name: "The Update Framework",
     });
 
-    await test
-      .expect(headingTheUpdateFramework, "Expect header to be visible")
-      .toBeVisible();
+    await expect(
+      headingTheUpdateFramework,
+      "Expect header to be visible",
+    ).toBeVisible();
   });
 });
