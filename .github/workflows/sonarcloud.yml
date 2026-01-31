@@ -15,21 +15,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 22
-          cache: "npm"
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "pnpm"
 
       - name: Install Dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run Tests with Coverage
-        run: npm run test -- --coverage
+        run: pnpm test -- --coverage
 
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarqube-scan-action@v6
