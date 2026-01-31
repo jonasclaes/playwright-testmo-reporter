@@ -4,7 +4,6 @@ const presetConfig = createDefaultPreset({});
 
 const jestConfig: JestConfigWithTsJest = {
   ...presetConfig,
-  testMatch: ["**/src/*.spec.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/dist/", "/example/"],
 };
 
