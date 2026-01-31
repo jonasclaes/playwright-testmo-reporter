@@ -1,0 +1,7 @@
+packages:
+  - .
+  - example
+
+onlyBuiltDependencies:
+  - esbuild
+  - unrs-resolver

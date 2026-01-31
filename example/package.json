@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "testmo automation:run:submit --instance https://jonasclaesbe.testmo.net --project-id 17 --source \"playwright-testmo-reporter\" --name example --results ./testmo/testmo.xml"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.54.1",
-    "@types/node": "^24.1.0"
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^24.10.9"
   },
   "dependencies": {
-    "playwright-testmo-reporter": "file:.."
+    "@testmo/testmo-cli": "^1.4.7",
+    "playwright-testmo-reporter": "workspace:"
   }
 }
