@@ -1,5 +1,13 @@
 # playwright-testmo-reporter
 
+## 1.19.0
+
+### Minor Changes
+
+- [`b400ec7`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/b400ec74c69096a235e41f904fa5eed12c7e94a3) Thanks [@jonasclaes](https://github.com/jonasclaes)! - upgrade fast-xml-parser to fix vulnerability
+
+- [`3e983d0`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/3e983d02d071a2eed2f6ad80a6b205ace3ec2998) Thanks [@jonasclaes](https://github.com/jonasclaes)! - switch from npm to pnpm
+
 ## 1.18.0
 
 ### Minor Changes
