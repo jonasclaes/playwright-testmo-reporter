@@ -10,7 +10,7 @@ import path from "path";
 import fs from "fs";
 import { XMLBuilder } from "fast-xml-parser";
 import { formatFailure, stripAnsiEscapes } from "./util";
-import { assert } from "playwright-core/lib/utils";
+import assert from "node:assert";
 
 export type TestStepCategory =
   | "hook"
