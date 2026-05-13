@@ -1,5 +1,11 @@
 # playwright-testmo-reporter
 
+## 1.19.2
+
+### Patch Changes
+
+- [`de12296`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/de12296936572d1bba72e303c02f910f1e1997aa) Thanks [@jonasclaes](https://github.com/jonasclaes)! - import assert from "assert" instead of playwright utils
+
 ## 1.19.1
 
 ### Patch Changes
