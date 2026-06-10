@@ -1,5 +1,11 @@
 # playwright-testmo-reporter
 
+## 1.19.2
+
+### Patch Changes
+
+- [`5d6b487`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/5d6b487688271a0e44a76f3ecc836fc776e890fa) Thanks [@jonasclaes](https://github.com/jonasclaes)! - update to typescript 6.0.3
+
 ## 1.19.1
 
 ### Patch Changes
