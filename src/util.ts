@@ -116,6 +116,7 @@ export function formatFailure(
         resultLines.push(colors.cyan(separator("   ")));
       }
     }
+    // @ts-expect-error - This is a private symbol that Playwright uses to store test output, but it is not typed in the public API.
     const output = (result[kOutputSymbol] || []) as TestResultOutput[];
     if (includeStdio && output.length) {
       const outputText = output

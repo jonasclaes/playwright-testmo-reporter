@@ -12,11 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.58.0",
-    "@types/node": "^24.10.9"
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.2"
   },
   "dependencies": {
-    "@testmo/testmo-cli": "^1.4.7",
+    "@testmo/testmo-cli": "^1.4.9",
     "playwright-testmo-reporter": "workspace:"
   }
 }

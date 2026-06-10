@@ -8,9 +8,9 @@ import type {
 } from "@playwright/test/reporter";
 import path from "path";
 import fs from "fs";
-import { XMLBuilder } from "fast-xml-parser";
+import XMLBuilder from "fast-xml-builder";
 import { formatFailure, stripAnsiEscapes } from "./util";
-import { assert } from "playwright-core/lib/utils";
+import assert from "node:assert";
 
 export type TestStepCategory =
   | "hook"
@@ -72,10 +72,10 @@ export class TestmoReporter implements Reporter {
   private readonly includeTestSubFields: boolean;
   private readonly attachmentBasePathCallback?: AttachmentBasePathCallback;
 
-  private config: FullConfig;
-  private suite: Suite;
-  private timestamp: Date;
-  private startTime: number;
+  private config!: FullConfig;
+  private suite!: Suite;
+  private timestamp!: Date;
+  private startTime!: number;
   private totalTests: number = 0;
   private totalFailures: number = 0;
   private totalSkipped: number = 0;
@@ -196,7 +196,7 @@ export class TestmoReporter implements Reporter {
       .slice(titlePathArray.length - this.testTitleDepth)
       .join(" › ");
 
-    const entry = {
+    const entry: XMLEntry = {
       "@_name": titlePath,
       "@_classname": suite.title,
       "@_assertions": 0,
@@ -327,14 +327,14 @@ export class TestmoReporter implements Reporter {
     const lastResult = testCase.results.at(-1);
     if (!lastResult) return;
 
-    const stepProperties = lastResult.steps.map((step) =>
-      this.createStepProperty(step),
-    );
+    const stepProperties = lastResult.steps
+      .map((step) => this.createStepProperty(step))
+      .filter((property) => property !== undefined);
 
     properties.push(...stepProperties);
   }
 
-  private createStepProperty(step: TestStep) {
+  private createStepProperty(step: TestStep): XMLEntry | undefined {
     let stepStatus = "passed";
 
     if (step.error) stepStatus = "failure";
@@ -355,7 +355,7 @@ export class TestmoReporter implements Reporter {
     };
   }
 
-  private createStepHtml(step: TestStep): string {
+  private createStepHtml(step: TestStep): string | undefined {
     if (!this.testStepCategories.includes(step.category as TestStepCategory)) {
       return;
     }
@@ -405,7 +405,7 @@ export class TestmoReporter implements Reporter {
 
   private addBrowserToProperties(suite: Suite, properties: XMLEntry[]) {
     if (this.embedBrowserType) {
-      const browser = suite.project().use.defaultBrowserType;
+      const browser = suite.project()?.use.defaultBrowserType;
 
       properties.push({
         "@_name": `browser`,
@@ -424,7 +424,14 @@ export class TestmoReporter implements Reporter {
   }
 }
 
-type XMLValue = string | number | boolean | XMLEntry | XMLEntry[] | undefined;
+type XMLValue =
+  | string
+  | number
+  | boolean
+  | XMLEntry
+  | XMLEntry[]
+  | null
+  | undefined;
 
 interface XMLEntry {
   [x: string]: XMLValue;

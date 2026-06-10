@@ -6,6 +6,7 @@ import {
   Location,
   TestCase,
   TestResult,
+  TestError,
 } from "@playwright/test/reporter";
 import path from "node:path";
 import TestmoReporter from "./reporter";
@@ -59,7 +60,7 @@ describe("Playwright Testmo Reporter", () => {
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -105,7 +106,7 @@ describe("Playwright Testmo Reporter", () => {
       ),
     );
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -151,7 +152,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: new Error("Test failed"),
+      error: new _TestError("Test failed"),
       status: "failed",
       stdout: ["This is a test failure", "This is another test failure"],
       attachments: [
@@ -177,7 +178,7 @@ describe("Playwright Testmo Reporter", () => {
     } satisfies TestResult);
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -223,7 +224,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -268,7 +269,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: null,
+      error: undefined,
       status: "passed",
       stdout: ["Hello, World!"],
       attachments: [],
@@ -283,7 +284,7 @@ describe("Playwright Testmo Reporter", () => {
     });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -328,7 +329,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: null,
+      error: undefined,
       status: "failed",
       stdout: [],
       attachments: [],
@@ -343,7 +344,7 @@ describe("Playwright Testmo Reporter", () => {
     });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -390,7 +391,7 @@ describe("Playwright Testmo Reporter", () => {
     mockTestCase.annotations.push({ type: "html:test", description: "Test" });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -435,7 +436,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: null,
+      error: undefined,
       status: "passed",
       stdout: [],
       attachments: [
@@ -466,7 +467,7 @@ describe("Playwright Testmo Reporter", () => {
     });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -518,7 +519,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: null,
+      error: undefined,
       status: "passed",
       stdout: [],
       attachments: [
@@ -549,7 +550,7 @@ describe("Playwright Testmo Reporter", () => {
     });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -594,7 +595,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: null,
+      error: undefined,
       status: "passed",
       stdout: [],
       attachments: [],
@@ -606,7 +607,7 @@ describe("Playwright Testmo Reporter", () => {
           title: "Step 1",
           startTime: new Date(),
           duration: 0,
-          error: null,
+          error: undefined,
           annotations: [],
           titlePath: function (): Array<string> {
             throw new Error("Function not implemented.");
@@ -619,7 +620,7 @@ describe("Playwright Testmo Reporter", () => {
           title: "Step 2",
           startTime: new Date(),
           duration: 0,
-          error: null,
+          error: undefined,
           annotations: [],
           titlePath: function (): Array<string> {
             throw new Error("Function not implemented.");
@@ -631,7 +632,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.1",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -644,7 +645,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.2",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -657,7 +658,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.3",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -670,7 +671,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.4",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -689,7 +690,7 @@ describe("Playwright Testmo Reporter", () => {
     });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -742,7 +743,7 @@ describe("Playwright Testmo Reporter", () => {
     );
     mockTestCase.addResult({
       duration: 0,
-      error: null,
+      error: undefined,
       status: "passed",
       stdout: [],
       attachments: [],
@@ -754,7 +755,7 @@ describe("Playwright Testmo Reporter", () => {
           title: "Step 1",
           startTime: new Date(),
           duration: 0,
-          error: null,
+          error: undefined,
           annotations: [],
           titlePath: function (): Array<string> {
             throw new Error("Function not implemented.");
@@ -766,7 +767,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.1",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -779,7 +780,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.2",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -792,7 +793,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.3",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -805,7 +806,7 @@ describe("Playwright Testmo Reporter", () => {
               title: "Step 1.4",
               startTime: new Date(),
               duration: 0,
-              error: null,
+              error: undefined,
               annotations: [],
               titlePath: function (): Array<string> {
                 throw new Error("Function not implemented.");
@@ -820,7 +821,7 @@ describe("Playwright Testmo Reporter", () => {
           title: "Step 2",
           startTime: new Date(),
           duration: 0,
-          error: null,
+          error: undefined,
           annotations: [],
           titlePath: function (): Array<string> {
             throw new Error("Function not implemented.");
@@ -837,7 +838,7 @@ describe("Playwright Testmo Reporter", () => {
     });
     mockFileSuite.addTest(mockTestCase);
 
-    reporter.onBegin(mockConfig, mockRootSuite as Suite);
+    reporter.onBegin!(mockConfig, mockRootSuite as Suite);
     // @ts-expect-error - We are testing the reporter, parameters are not used
     reporter.onEnd();
 
@@ -845,7 +846,7 @@ describe("Playwright Testmo Reporter", () => {
   });
 
   it('should return printsToStdio as "false"', () => {
-    expect(reporter.printsToStdio()).toBe(false);
+    expect(reporter.printsToStdio?.()).toBe(false);
   });
 });
 
@@ -888,17 +889,17 @@ class _Suite implements Suite {
 
 class _TestCase implements TestCase {
   annotations: { type: string; description?: string }[];
-  expectedStatus: "passed" | "failed" | "timedOut" | "skipped" | "interrupted";
-  id: string;
+  expectedStatus!: "passed" | "failed" | "timedOut" | "skipped" | "interrupted";
+  id!: string;
   location: Location;
   parent: Suite;
-  repeatEachIndex: number;
+  repeatEachIndex!: number;
   results: TestResult[];
-  retries: number;
-  tags: string[];
-  timeout: number;
-  title: string;
-  type: "test";
+  retries!: number;
+  tags!: string[];
+  timeout!: number;
+  title!: string;
+  type!: "test";
   _outcome: "skipped" | "expected" | "unexpected" | "flaky";
 
   constructor(
@@ -927,5 +928,43 @@ class _TestCase implements TestCase {
 
   addResult(result: TestResult): void {
     this.results.push(result);
+  }
+}
+
+class _TestError implements TestError {
+  /**
+   * Error cause. Set when there is a
+   * [cause](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause) for the
+   * error. Will be `undefined` if there is no cause or if the cause is not an instance of [Error].
+   */
+  cause?: TestError;
+
+  /**
+   * Error location in the source code.
+   */
+  location?: Location;
+
+  /**
+   * Error message. Set when [Error] (or its subclass) has been thrown.
+   */
+  message?: string;
+
+  /**
+   * Source code snippet with highlighted error.
+   */
+  snippet?: string;
+
+  /**
+   * Error stack. Set when [Error] (or its subclass) has been thrown.
+   */
+  stack?: string;
+
+  /**
+   * The value that was thrown. Set when anything except the [Error] (or its subclass) has been thrown.
+   */
+  value?: string;
+
+  constructor(message: string) {
+    this.message = message;
   }
 }
