@@ -57,6 +57,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
 
@@ -92,6 +94,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -138,6 +142,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -210,6 +216,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -256,6 +264,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -316,6 +326,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -376,6 +388,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -423,6 +437,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -506,6 +522,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -582,6 +600,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
@@ -730,6 +750,8 @@ describe("Playwright Testmo Reporter", () => {
       reportSlowTests: null,
       updateSourceMethod: "overwrite",
       tags: [],
+      argv: process.argv,
+      failOnFlakyTests: false,
     };
     const mockRootSuite = new _Suite("Test Suite", "root");
     const mockProjectSuite = new _Suite("Project Suite", "project");
