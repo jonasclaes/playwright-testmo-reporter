@@ -1,0 +1,11 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  "labels": ["renovate"],
+  "configMigration": true,
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "packageRules": []
+}
