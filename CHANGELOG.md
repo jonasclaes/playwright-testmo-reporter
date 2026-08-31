@@ -1,5 +1,11 @@
 # playwright-testmo-reporter
 
+## 1.19.4
+
+### Patch Changes
+
+- [`2fb5912`](https://github.com/jonasclaes/playwright-testmo-reporter/commit/2fb591297d9af1eac1ad7ab2114a752e2d4991ca) Thanks [@jonasclaes](https://github.com/jonasclaes)! - dependency updates
+
 ## 1.19.3
 
 ### Patch Changes
