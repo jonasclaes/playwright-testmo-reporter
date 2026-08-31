@@ -3,5 +3,10 @@ packages:
   - example
 
 allowBuilds:
+  "@parcel/watcher": true
   esbuild: true
   unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - "@types/node@26.4.0"
+  - lint-staged@17.4.1

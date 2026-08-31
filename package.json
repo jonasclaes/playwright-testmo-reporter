@@ -1,6 +1,6 @@
 {
   "name": "playwright-testmo-reporter",
-  "version": "1.19.2",
+  "version": "1.19.3",
   "description": "A Playwright Reporter for the Testmo SaaS.",
   "main": "dist/reporter.js",
   "module": "dist/reporter.mjs",
@@ -43,33 +43,33 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "fast-xml-builder": "^1.2.0",
+    "fast-xml-builder": "^1.3.1",
     "stack-utils": "^2.0.6"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.7.0",
-    "@changesets/cli": "^2.31.0",
-    "@changesets/config": "^3.1.4",
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
+    "@changesets/config": "^4.0.0",
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.9.2",
+    "@types/node": "^26.4.0",
     "@types/stack-utils": "^2.0.3",
-    "eslint": "^10.4.1",
+    "eslint": "^10.9.1",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.6.0",
+    "globals": "^17.11.0",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
-    "lint-staged": "^17.0.7",
-    "prettier": "^3.8.4",
-    "ts-jest": "^29.4.11",
+    "lint-staged": "^17.4.1",
+    "prettier": "^3.9.6",
+    "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.61.0"
+    "typescript-eslint": "^8.68.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts}": "eslint --fix"
   },
-  "packageManager": "pnpm@11.5.3+sha512.7ac1c919341c213a34dc0d02afb7143c5c26ac26ee8c4782deea821b8ac64d2134a081fd8941dae6e29bbb48f58dfc2b7fbceeccc07cb2f09d219d342a4969ed"
+  "packageManager": "pnpm@11.24.0+sha512.bd27e345e976dcb0be0b7a1228217b049a817e21b1f355c90dbe7dc46671895a8bc1e6d06c24554505ea93ea0b45f489a27ec1bfbc8de6a9659fca0f16fa0000"
 }
