@@ -13,11 +13,7 @@ import { formatFailure, stripAnsiEscapes } from "./util";
 import assert from "node:assert";
 
 export type TestStepCategory =
-  | "hook"
-  | "expect"
-  | "pw:api"
-  | "test.step"
-  | "fixture";
+  "hook" | "expect" | "pw:api" | "test.step" | "fixture";
 export type AttachmentBasePathCallback = (basePath: string) => string;
 
 export interface TestmoReporterOptions {
@@ -425,13 +421,7 @@ export class TestmoReporter implements Reporter {
 }
 
 type XMLValue =
-  | string
-  | number
-  | boolean
-  | XMLEntry
-  | XMLEntry[]
-  | null
-  | undefined;
+  string | number | boolean | XMLEntry | XMLEntry[] | null | undefined;
 
 interface XMLEntry {
   [x: string]: XMLValue;
