@@ -149,10 +149,10 @@ importers:
         version: 2.0.6
     devDependencies:
       "@changesets/changelog-github":
-        specifier: ^1.0.0
+        specifier: ^1.0.1
         version: 1.0.1
       "@changesets/cli":
-        specifier: ^3.0.0
+        specifier: ^3.0.2
         version: 3.0.2
       "@changesets/config":
         specifier: ^4.0.0
@@ -164,28 +164,28 @@ importers:
         specifier: ^30.0.0
         version: 30.0.0
       "@types/node":
-        specifier: ^26.4.0
+        specifier: ^26.4.1
         version: 26.4.1
       "@types/stack-utils":
         specifier: ^2.0.3
         version: 2.0.3
       eslint:
-        specifier: ^10.9.1
+        specifier: ^10.10.0
         version: 10.10.0(supports-color@8.1.1)
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@10.10.0(supports-color@8.1.1))
       globals:
-        specifier: ^17.11.0
+        specifier: ^17.12.0
         version: 17.12.0
       husky:
         specifier: ^9.1.7
         version: 9.1.7
       jest:
-        specifier: ^30.4.2
+        specifier: ^30.5.1
         version: 30.5.1(@types/node@26.4.1)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@26.4.1)(typescript@6.0.3))
       lint-staged:
-        specifier: ^17.4.1
+        specifier: ^17.5.0
         version: 17.5.0
       prettier:
         specifier: ^3.9.6
@@ -203,7 +203,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.68.0
+        specifier: ^8.69.0
         version: 8.69.0(eslint@10.10.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
 
   example:
