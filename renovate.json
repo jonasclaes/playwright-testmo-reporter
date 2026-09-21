@@ -7,5 +7,10 @@
   "configMigration": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
-  "packageRules": []
+  "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "groupName": "npm dependencies"
+    }
+  ]
 }
